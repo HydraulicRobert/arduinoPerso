@@ -1,0 +1,21 @@
+Mappe: Projektmappe
+Dateien: Anhang
+	Anlagen: Anlagen
+	Datenblätter: Datenblätter der jeweiligen Komponenten. Sortiert nach Kategorie
+	Deckblatt: Deckblatt
+	Fotos: Foto vom fertigen Arduino
+		LCD: Fotos vom LCD unter verschiedenen Szenarien
+	Gliederung: Inhaltsverzeichnis in verschiedenen Formaten
+	Hardware: Bauteilliste, Pinbelegung
+	Inhalt: Inhaltsteil der Projektmappe
+	Programm: Enthält Programmcode mit nach Lehrerempfehlung reduzierter Kommentarmenge
+		Bibliotheken: Bibliotheken der Komponenten. Sortiert nach Kategorie
+		Personenzaehler: Programm
+		Konfigurierbare Variablen.png: zeigt Konfigurierbare Variablen. Siehe Mappe für mehr informationen.
+	Quellen: Quellenverzeichnis
+	Rechnungen: Rechnungen der Während der Projektzeit erworbenen Komponenten
+	Skizze: Enthält per Fritzing erstellte Steckplatine samt heruntergeladener Komponenten. Siehe Quellenverzeichnis für Quellen
+	Sonstiges: nicht zuordenbare Dateien.
+	Struktogramm: Per Structorizer erstelltes Struktogramm
+	Testdurchlauf: Für die Nutzungsanalyse durchgeführte Durchläufe
+	Zeitplan: Enthält Zeitstrahl

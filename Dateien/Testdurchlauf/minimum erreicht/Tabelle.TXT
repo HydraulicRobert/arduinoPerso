@@ -1,0 +1,13 @@
+Raumnummer: ;B11;
+Zeitstempel [s]; Maximal erlaubte anzahl Personen; anzahl Personen im Raum; Anzahlaenderung; Personenzahl Gesamt; Personenzahl Gesamt raus; Personenzahl Gesamt rein; Status;
+0.420;2;1;+;1;0;1;nicht voll;
+0.480;2;1;0;1;0;1;Durchgang wird blockiert;
+0.480;2;1;0;1;0;1;Durchgang wieder frei;
+1.160;2;0;-;2;1;1;nicht voll;
+1.220;2;0;0;2;1;1;Durchgang wird blockiert;
+1.240;2;0;0;2;1;1;Durchgang wird blockiert;
+1.260;2;0;0;2;1;1;Durchgang wird blockiert;
+1.280;2;0;0;2;1;1;Durchgang wird blockiert;
+1.280;2;0;0;2;1;1;Durchgang wieder frei;
+1.940;2;0;0;3;1;1;Durchgang wird blockiert;
+1.940;2;0;0;3;1;1;Durchgang wieder frei;

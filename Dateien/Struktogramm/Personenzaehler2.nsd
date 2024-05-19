@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root xmlns:nsd="https://structorizer.fisch.lu" version="3.30-05" preRepeat="until " postFor="to" preReturn="return" postForIn="in" preWhile="while " output="OUTPUT" input="INPUT" preFor="for" preExit="exit" preLeave="leave" ignoreCase="true" preThrow="throw" preForIn="foreach" stepFor="by" author="rojat" created="2021-04-23" changedby="rojat" changed="2021-04-24" origin="Structorizer 3.30-05" text="&#34;Personenzaehler&#34;" comment="" color="ffffff" type="program" style="nice">
+	<children>
+		<instruction text="&#34;maximaleAnzahlPersonen:int = 2&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;aktuelleAnzahlPersonen:int = 0&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;zeitMesser:float = 0.0&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;zeitSprung:int = 20.0&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;verzoegerung:int = 1000&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;raumNummer:String = &#34;&#34;B11&#34;&#34;&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;Status:String = &#34;&#34;&#34;&#34;&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;anzahlAenderung:char = ' '&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;personenZahlGesamt:int&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;personenZahlRein:int&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;personenZahlRaus:int&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;&#34;&#34;Wire.h&#34;&#34;:include&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;LiquidCrystal_I2C.h:include&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;lcd:LiquidCrystal_I2C(0x27, 20,4)&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;&#34;&#34;SPI.h&#34;&#34;:einbinden&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;&#34;&#34;SD.h&#34;&#34;:einbinden&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;modulSDPin:int = 5&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;myFile:File&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;Dateiname:String = &#34;&#34;zaehl.txt&#34;&#34;&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;pinSensorRein:int = 7&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;pinSensorMitte:int = 8&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;pinSensorRaus:int = 9&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;Serial.begin(9600)&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;pinMode(pinSensorRein, INPUT)&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;pinMode(pinSensorMitte, INPUT)&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;pinMode(pinSensorRaus, INPUT)&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;lcd.init()&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;lcd.backlight()&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;pinMode(modulSDPin, OUTPUT)&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<alternative text="&#34;SD angeschlossen&#34;" comment="" color="ffffff" disabled="0">
+			<qTrue color="ffffff">
+			</qTrue>
+			<qFalse>
+				<instruction text="&#34;Ausgabe:lcd = &#34;&#34;SD Fail&#34;&#34;&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+				<repeat text="&#34;until (1)&#34;" comment="" color="ffffff" disabled="0">
+					<qRepeat color="ffffff">
+					</qRepeat>
+				</repeat>
+			</qFalse>
+		</alternative>
+		<instruction text="&#34;SD.begin(modulSDPin)&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;myFile = SD.open(Dateiname,FILE_WRITE)&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;myFile.print(&#34;&#34;Raumnummer: &#34;&#34;+Raumnummer)&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;myFile.print(&#34;&#34;Zeitstempel [s]; Maximal erlaubte anzahl Personen; anzahl Personen im Raum; Anzahlaenderung; Personenzahl Gesamt; Personenzahl Gesamt raus; Personenzahl Gesamt rein; Status;&#34;&#34;)&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<instruction text="&#34;myFile.close()&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+		<forever comment="&#34;Void Loop&#34;" color="ffffff" disabled="0">
+			<qForever>
+				<instruction text="&#34;lcd:print(&#34;&#34;Raum: &#34;&#34;+raumNummer)&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+				<instruction text="&#34;lcd.print(&#34;&#34;Personen: &#34;&#34;+aktuelleAnzahlPersonen+&#34;&#34;/&#34;&#34;+maximaleAnzahlPersonen)&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+				<instruction text="&#34;lcd.print(&#34;&#34;Status: &#34;&#34;)&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+				<alternative text="&#34;digitalRead(pinSensorMitte) != 1&#34;" comment="" color="ffffff" disabled="0">
+					<qTrue>
+						<while text="&#34;while (digitalRead(pinSensorMitte) != 1)&#34;" comment="" color="ffffff" disabled="0">
+							<qWhile>
+								<instruction text="&#34;lcd.print(&#34;&#34;beweg dich&#34;&#34;)&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+								<instruction text="&#34;zeitMesser+=zeitSprung&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+								<instruction text="&#34;Status = &#34;&#34;Durchgang wird blockiert&#34;&#34;&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+								<instruction text="&#34;anzahlAenderung = '0'&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+								<instruction text="&#34;myFile.open(Dateiname, FILE_WRITE)&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+								<instruction text="&#34;myFile.print(zeitMesser+&#34;&#34;;&#34;&#34;+&#34;&#34;maximaleAnzahlPersonen+&#34;&#34;;&#34;&#34;+aktuelleAnzahlPersonen+&#34;&#34;;&#34;&#34;+anzahlAenderung+&#34;&#34;;&#34;&#34;+personenZahlGesamt+&#34;&#34;;&#34;&#34;+personenZahlRaus+&#34;&#34;;&#34;&#34;+personenZhalRein+&#34;&#34;;&#34;&#34;+Status+&#34;&#34;;&#34;&#34;)&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+								<instruction text="&#34;myFile.close()&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+								<instruction text="&#34;verzoegerung(zeitSprung)&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+							</qWhile>
+						</while>
+						<instruction text="&#34;Status = &#34;&#34;Durchgang wieder frei&#34;&#34;&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+						<instruction text="&#34;anzahlAenderung = '0'&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+						<instruction text="&#34;myFile.open(Dateiname, FILE_WRITE)&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+						<instruction text="&#34;myFile.print(zeitMesser+&#34;&#34;;&#34;&#34;+&#34;&#34;maximaleAnzahlPersonen+&#34;&#34;;&#34;&#34;+aktuelleAnzahlPersonen+&#34;&#34;;&#34;&#34;+anzahlAenderung+&#34;&#34;;&#34;&#34;+personenZahlGesamt+&#34;&#34;;&#34;&#34;+personenZahlRaus+&#34;&#34;;&#34;&#34;+personenZhalRein+&#34;&#34;;&#34;&#34;+Status+&#34;&#34;;&#34;&#34;)&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+						<instruction text="&#34;myFile.close()&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+						<alternative text="&#34;aktuelleAnzahlPersonen&#62;=maximaleAnzahlPersonen&#34;" comment="" color="ffffff" disabled="0">
+							<qTrue>
+								<instruction text="&#34;Status = &#34;&#34;voll&#34;&#34;&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+							</qTrue>
+							<qFalse color="ffffff">
+							</qFalse>
+						</alternative>
+						<alternative text="&#34;aktuelleAnzahlPersonen&#60;maximaleAnzahlPersonen&#34;" comment="" color="ffffff" disabled="0">
+							<qTrue>
+								<instruction text="&#34;Status = &#34;&#34;nicht voll&#34;&#34;&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+							</qTrue>
+							<qFalse color="ffffff">
+							</qFalse>
+						</alternative>
+						<instruction text="&#34;lcd.print(Status)&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+						<alternative text="&#34;digitalRead(pinSensorRaus) != 1&#34;" comment="" color="ffffff" disabled="0">
+							<qTrue>
+								<instruction text="&#34;fertig:int = 0&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+								<while text="&#34;while (fertig == 0)&#34;" comment="" color="ffffff" disabled="0">
+									<qWhile>
+										<alternative text="&#34;fertig == 1&#34;" comment="" color="ffffff" disabled="0">
+											<qTrue>
+												<instruction text="&#34;personenZahlGesamt++&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+												<instruction text="&#34;aktuelleAnzahlPersonen--&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+												<instruction text="&#34;anzahlAenderung = '-'&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+												<instruction text="&#34;myFile.open(Dateiname, FILE_WRITE)&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+												<instruction text="&#34;myFile.print(zeitMesser+&#34;&#34;;&#34;&#34;+&#34;&#34;maximaleAnzahlPersonen+&#34;&#34;;&#34;&#34;+aktuelleAnzahlPersonen+&#34;&#34;;&#34;&#34;+anzahlAenderung+&#34;&#34;;&#34;&#34;+personenZahlGesamt+&#34;&#34;;&#34;&#34;+personenZahlRaus+&#34;&#34;;&#34;&#34;+personenZhalRein+&#34;&#34;;&#34;&#34;+Status+&#34;&#34;;&#34;&#34;)&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+												<instruction text="&#34;myFile.close()&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+											</qTrue>
+											<qFalse color="ffffff">
+											</qFalse>
+										</alternative>
+										<alternative text="&#34;digitalRead(pinSensorRein) != 1&#34;" comment="" color="ffffff" disabled="0">
+											<qTrue>
+												<instruction text="&#34;fertig = 1&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+											</qTrue>
+											<qFalse color="ffffff">
+											</qFalse>
+										</alternative>
+										<instruction text="&#34;delay(zeitSprung)&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+										<instruction text="&#34;zeitMesser+=zeitSprung&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+									</qWhile>
+								</while>
+								<alternative text="&#34;digitalRead(pinSensorRein) != 1&#34;" comment="" color="ffffff" disabled="0">
+									<qTrue>
+										<instruction text="&#34;fertig:int = 0&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+										<while text="&#34;while (fertig == 0)&#34;" comment="" color="ffffff" disabled="0">
+											<qWhile>
+												<alternative text="&#34;digitalRead(pinSensorMitte) != 1&#34;" comment="" color="ffffff" disabled="0">
+													<qTrue>
+														<instruction text="&#34;fertig = 1&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+														<alternative text="&#34;fertig == 1&#34;" comment="" color="ffffff" disabled="0">
+															<qTrue>
+																<instruction text="&#34;personenZahlGesamt++&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+																<instruction text="&#34;personenZahlRein++&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+																<instruction text="&#34;aktuelleAnzahlPersonen++&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+																<instruction text="&#34;anzahlAenderung = '+'&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+																<instruction text="&#34;myFile.open(Dateiname, FILE_WRITE)&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+																<instruction text="&#34;myFile.print(zeitMesser+&#34;&#34;;&#34;&#34;+&#34;&#34;maximaleAnzahlPersonen+&#34;&#34;;&#34;&#34;+aktuelleAnzahlPersonen+&#34;&#34;;&#34;&#34;+anzahlAenderung+&#34;&#34;;&#34;&#34;+personenZahlGesamt+&#34;&#34;;&#34;&#34;+personenZahlRaus+&#34;&#34;;&#34;&#34;+personenZhalRein+&#34;&#34;;&#34;&#34;+Status+&#34;&#34;;&#34;&#34;)&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+																<instruction text="&#34;myFile.close()&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+															</qTrue>
+															<qFalse color="ffffff">
+															</qFalse>
+														</alternative>
+													</qTrue>
+													<qFalse color="ffffff">
+													</qFalse>
+												</alternative>
+												<alternative text="&#34;digitalRead(pinSensorRaus) != 1&#34;" comment="" color="ffffff" disabled="0">
+													<qTrue>
+														<instruction text="&#34;fertig = 1&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+													</qTrue>
+													<qFalse color="ffffff">
+													</qFalse>
+												</alternative>
+												<instruction text="&#34;delay(zeitSprung)&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+												<instruction text="&#34;zeitMesser+=zeitSprung&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+											</qWhile>
+										</while>
+										<instruction text="&#34;delay(zeitSprung)&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+										<instruction text="&#34;zeitMesser+=zeitSprung&#34;" comment="" color="ffffff" rotated="0" disabled="0"></instruction>
+									</qTrue>
+									<qFalse color="ffffff">
+									</qFalse>
+								</alternative>
+							</qTrue>
+							<qFalse color="ffffff">
+							</qFalse>
+						</alternative>
+					</qTrue>
+					<qFalse color="ffffff">
+					</qFalse>
+				</alternative>
+			</qForever>
+		</forever>
+	</children>
+</root>
